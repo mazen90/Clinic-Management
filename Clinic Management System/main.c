@@ -22,6 +22,7 @@ void edit(){
 FILE *patients = fopen("Patients.txt","a");
 FILE *patient = fopen("Patients.txt","r");
 FILE *patient2 = fopen("Patients.txt","r");
+FILE *patient3 = fopen("Patients.txt","r");
 
 FILE *temp = fopen("temporary.tmp","w");
 char id[8];
@@ -32,6 +33,33 @@ printf("\nNew ID: ");
 scanf("%s",newID);
 int c = 0;
 char buffer[200];
+char buffer3[200];
+int c2 = 0;
+//int j = 0;
+char tempID2[8];
+while((fgets(buffer3 , 200 , patient3))!= NULL){
+        int j = 0;
+    char tempID2[10] = "";
+    int tempIDIndex2 = -1;
+    while(buffer3[j] != ','){
+            tempID2[++tempIDIndex2] = buffer3[j];
+           // printf("hi");
+            //printf("%c",buffer[i]);
+       // strcat(tempID,buffer[i]);
+        //printf("%s",tempID);
+       // printf("olddata");
+        j++;
+    }
+    if(strcmp(newID,tempID2) == 0){
+        printf("This ID already exists. \n");
+c2 =1 ;
+break;
+    }
+}
+if(c2 == 1){
+printf("hello");
+}
+else{
 while((fgets(buffer , 200 , patient))!= NULL){
 printf("hi");
         c++;
@@ -45,7 +73,7 @@ printf("hi");
             //printf("%c",buffer[i]);
        // strcat(tempID,buffer[i]);
         //printf("%s",tempID);
-        printf("olddata");
+       // printf("olddata");
         i++;
     }
     // put new data in temporary file
@@ -62,7 +90,7 @@ printf("hi");
         int index = -1;
         while((fgets(buffer2 , 200 , patient2))!= NULL){
            // printf("%d",c);
-           printf("getout");
+         //  printf("getout");
                 x++;
             if(c == x){
                     int n = 0;
@@ -75,8 +103,8 @@ printf("hi");
                     }
                     else{
                        // strcat(pat[q],buffer[n]);
-                       printf("newdata");
-                       printf("%d",q);
+                      // printf("newdata");
+                       //printf("%d",q);
                       // pat[q][++index] = buffer2[n];
                      // strncat(pat[q],&buffer2[n],1);
                       //printf("%s",pat[q]);
@@ -100,7 +128,7 @@ printf("hi");
 
                 sprintf(newData,"%s,%s,%s,%s",newID,name2,gender2,age2);
                // printf("%s",newID);
-                printf("%s,%s,%s,%s hi",id2,name2,gender2,age2);
+              //  printf("%s,%s,%s,%s hi",id2,name2,gender2,age2);
 
 
                 fprintf(temp , "%s\n",newData);
@@ -114,14 +142,19 @@ printf("hi");
         }
        break;
     }
-}
+}} // end of while
 fclose(patient2);
 fclose(patient);
 fclose(patients);
+fclose(patient3);
 fclose(temp);
+if(c2 == 0){
 remove("Patients.txt");
 rename("temporary.tmp","Patients.txt");
-
+}
+else{
+    remove("temporary.tmp");
+}
 
 }
 void addPatient(){
@@ -143,9 +176,33 @@ printf("\nAge: ");
 gets(age);
 printf("\nID: ");
 gets(id);
+int c2 = 0;
+char tempID2[8];
+FILE *patient4 = fopen("Patients.txt","r");
+char buffer3[200];
+while((fgets(buffer3 , 200 , patient4))!= NULL){
+        int j = 0;
+    char tempID2[10] = "";
+    int tempIDIndex2 = -1;
+    while(buffer3[j] != ','){
+            tempID2[++tempIDIndex2] = buffer3[j];
+           // printf("hi");
+            //printf("%c",buffer[i]);
+       // strcat(tempID,buffer[i]);
+        //printf("%s",tempID);
+       // printf("olddata");
+        j++;
+    }
+    if(strcmp(id,tempID2) == 0){
+        printf("This ID already exists. \n");
+c2 =1 ;
+break;
+    }
+}
 
-
-fprintf(patients,"%s,%s,%s,%s\n",id,name,gender,age);
+if(c2 == 0){
+fprintf(patients,"%s,%s,%s,%s\n",id,name,gender,age); }
+fclose(patient4);
 }
 
 
@@ -168,8 +225,8 @@ else{
 }
 if(f == 1){
     printf("Admin");
-   // addPatient();
-    edit();
+    addPatient();
+  //  edit();
 
 }
 else{
