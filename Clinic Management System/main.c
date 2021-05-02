@@ -4,6 +4,92 @@
 void admin();
 void addPatient();
 void edit();
+void reserve(){
+printf("\nID: ");
+char id[8];
+scanf("%s",id);
+FILE *patient = fopen("Patients.txt","r");
+FILE *slots = fopen("Newres2.txt","r");
+FILE *slots2 = fopen("Newres2.txt","r");
+//FILE *slotsw = fopen("Newres1.txt","w");
+FILE *tempo = fopen("tem.tmp","w");
+char buffer[200];
+char buffer2[200];
+    int exists = 0;
+        int y = 0;
+
+
+while(fgets(buffer,200,patient)!= NULL){
+    int j = 0;
+    char tempID2[10] = "";
+    int tempIDIndex2 = -1;
+    while(buffer[j] != ','){
+           // tempID2 = "";
+
+            tempID2[++tempIDIndex2] = buffer[j];
+           // printf("hi");
+            //printf("%c",buffer[i]);
+       // strcat(tempID,buffer[i]);
+        //printf("%s",tempID);
+       // printf("olddata");
+        j++;
+    }// printf("%s",tempID2);
+    char x = '6' ;
+    char buffer3[200];
+    if(strcmp(tempID2,id) == 0){
+        exists = 1;
+        printf("\n");
+        printf("Enter number next to unreserved slot you want to reserve\n");
+        printf("Slots: \n");
+       // if(slots == NULL){
+         //   printf("No");
+        //}
+      //  if(fgets(buffer2,200,slots)== NULL){
+          //  printf("no");
+        //}
+        while(fgets(buffer2,200,slots)!= NULL){
+            //printf("haho");
+            printf("%s",buffer2);
+        }
+       // scanf("%c",x);
+        while(fgets(buffer3,200,slots2)!= NULL){
+            if(isdigit(buffer3[0]) && buffer3[0] == x){
+                    y = 1;
+                fprintf(tempo,"Reserved%s,%s",id,buffer3);
+            }
+            else {
+                fprintf(tempo,"%s",buffer3);
+            }
+
+        }
+        if(y == 1){
+            printf("Reservation Completed Successfully \n");
+        }
+        else {
+            printf("Reservation is not successful , please enter a valid slot \n ");
+        }
+
+    }
+
+}
+if(exists == 0){
+    printf("Please Enter a valid ID\n");
+}
+
+fclose(patient);
+fclose(slots);
+fclose(slots2);
+//fclose(slotsw);
+fclose(tempo);
+if(exists != 0 && y == 1){
+remove("Newres2.txt");
+rename("tem.tmp","Newres2.txt");
+}
+
+
+
+
+}
 
 int main()
 {
@@ -225,8 +311,9 @@ else{
 }
 if(f == 1){
     printf("Admin");
-    addPatient();
+  //  addPatient();
   //  edit();
+  reserve();
 
 }
 else{
