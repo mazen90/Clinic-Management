@@ -4,6 +4,7 @@
 void admin();
 void addPatient();
 void edit();
+void user();
 void reserve(){
 printf("\nID: ");
 char id[8];
@@ -391,10 +392,22 @@ else{
 }
 if(f == 1){
     printf("Admin");
+    printf("\n");
+    printf("Please Press number next to the option you want: \n 1- Add Patient \n 2- Edit ID \n 3- Reserve an appointment \n 4- Cancel Reservation\n");
+    int option;
+    scanf("%d",&option);
+    switch(option){
+    case 1: addPatient(); break;
+    case 2: edit(); break;
+    case 3: reserve(); break;
+    case 4: cancel(); break;
+    default: printf("Please Enter a valid Option \n");
+    }
+
   //  addPatient();
   //  edit();
  // reserve();
- cancel();
+// cancel();
 
 }
 else{
