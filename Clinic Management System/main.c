@@ -5,6 +5,70 @@ void admin();
 void addPatient();
 void edit();
 void user();
+void viewres(){
+FILE *v = fopen("Newres2.txt","r");
+char buffer[200];
+printf("\n");
+while(fgets(buffer,200,v) != NULL){
+    printf("%s",buffer);
+
+}
+fclose(v);
+}
+void view(){
+
+FILE *use = fopen("Patients.txt","r");
+FILE *use2 = fopen("Patients.txt","r");
+
+int x = 0;
+char idUser[80];
+printf("\n ID: ");
+scanf("%s",idUser);
+char buffer[200];
+char buffer2[200];
+
+int k = 0;
+while(fgets(buffer,200,use)!= NULL){
+    k++;
+char tempID3[80] = "";
+        int tempIDIndex2 = -1;
+        int j = 0;
+ while(buffer[j] != ','){
+     //   printf("it workd");
+            tempID3[++tempIDIndex2] = buffer[j];
+           // printf("%c \n",buffer[j]);
+            //printf("%s",tempID3);
+           // printf("hi");
+            //printf("%c",buffer[i]);
+       // strcat(tempID,buffer[i]);
+        //printf("%s",tempID);
+       // printf("olddata");
+        j++;
+    }
+
+    if(strcmp(tempID3,idUser) == 0){
+        //  printf("hahau");
+            int l =0;
+            while(fgets(buffer2,200,use2) != NULL){
+                l++;
+    if(l == k){
+          //  printf("hahau");
+        printf("\n %s \n",buffer2);
+        break;
+    }
+
+            }
+       break;
+    }
+    else{
+          //  printf("%s",tempID3);
+        continue;
+    }
+    }
+ //printf("%s",tempID2);
+fclose(use);
+fclose(use2);
+}
 void reserve(){
 printf("\nID: ");
 char id[8];
@@ -181,6 +245,12 @@ int main()
     scanf("%c" , &mode);
     if(mode == '1'){
         admin();
+    }
+    else if(mode == '2'){
+        user();
+    }
+    else{
+        printf("\n Please Enter a Valid Mode \n");
     }
 
     return 0;
@@ -414,4 +484,17 @@ else{
     exit(1);
 }
 
+}
+void user(){
+    printf("\n");
+    printf("1- View Data \n 2- View Reservations \n");
+    int x;
+    scanf("%d",&x);
+    switch(x){
+    case 1: view(); break;
+    case 2: viewres(); break;
+    default: printf("Please Enter a valid slot");
+    }
+//view();
+//viewres();
 }
