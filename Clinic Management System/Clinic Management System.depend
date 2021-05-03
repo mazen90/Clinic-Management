@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1619855833 source:d:\ch\clinic management system\main.c
+1620012036 source:d:\ch\clinic management system\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

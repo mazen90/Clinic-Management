@@ -95,6 +95,81 @@ rename("tem.tmp","Newres2.txt");
 
 
 }
+void cancel(){
+
+FILE *cancelling = fopen("Newres2.txt","r");
+FILE *tom = fopen("tom.tmp","w");
+FILE *slotss = fopen("Newres2.txt","r");
+char buffer[200];
+/*while(fgets(buffer,200,cancelling) != NULL){
+    if(buffer[0] == 'R'){
+        int index = -1;
+        int c = 0;
+        while(buffer[c] != ','){
+            c++;
+        }
+    }
+    else{
+        fprintf(tom,"%s",buffer);
+    }
+
+}*/
+int slot;
+char buff2[200];
+FILE *bkp = fopen("Newres1.txt","r");
+printf("\n Enter the number of slot you want to cancel \n");
+FILE *slots = fopen("Newres2.txt","r");
+char b[200];
+printf("\n");
+while(fgets(b,200,slotss) != NULL){
+    printf("%s",b);
+}
+printf("\n");
+scanf("%d",&slot);
+//printf("it works");
+char slot_char = slot + '0';
+int slotsarray[5] = {1,2,3,4,5};
+int flag = 0;
+for(int i = 0;i<5;i++){
+    if(slotsarray[i] == slot){
+        flag = 1;
+        break;
+    }
+}
+if(flag != 1){
+    printf("Please enter a valid slot");
+}
+else{
+       // printf("it works");
+    int q = 0;
+    char buff[200];
+    while(fgets(buff,200,cancelling) != NULL){
+        q++;
+       // if(buff[0] == 'R'){
+            if(q == slot){
+                int qq = 0;
+                while(fgets(buff2,200,bkp) != NULL){
+                    qq++;
+                    if(qq == slot){
+                          //  printf("it works");
+                        fprintf(tom,"%s",buff2);
+                        break;
+                    }
+                }
+            }else{ printf("it works");
+            fprintf(tom,"%s",buff);
+            }
+
+    }
+}
+fclose(cancelling);
+fclose(tom);
+fclose(bkp);
+fclose(slots);
+fclose(slotss);
+remove("Newres2.txt");
+rename("tom.tmp","Newres2.txt");
+}
 
 int main()
 {
@@ -318,7 +393,8 @@ if(f == 1){
     printf("Admin");
   //  addPatient();
   //  edit();
-  reserve();
+ // reserve();
+ cancel();
 
 }
 else{
