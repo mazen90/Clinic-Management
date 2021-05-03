@@ -34,13 +34,16 @@ while(fgets(buffer,200,patient)!= NULL){
        // printf("olddata");
         j++;
     }// printf("%s",tempID2);
-    char x = '6' ;
+    int x  ;
+
     char buffer3[200];
     if(strcmp(tempID2,id) == 0){
         exists = 1;
         printf("\n");
         printf("Enter number next to unreserved slot you want to reserve\n");
         printf("Slots: \n");
+             //   scanf("%c",&x);
+
        // if(slots == NULL){
          //   printf("No");
         //}
@@ -51,9 +54,11 @@ while(fgets(buffer,200,patient)!= NULL){
             //printf("haho");
             printf("%s",buffer2);
         }
-       // scanf("%c",x);
+                    scanf("%d",&x);
+                    char xx = x + '0';
+
         while(fgets(buffer3,200,slots2)!= NULL){
-            if(isdigit(buffer3[0]) && buffer3[0] == x){
+            if(isdigit(buffer3[0]) && buffer3[0] == xx){
                     y = 1;
                 fprintf(tempo,"Reserved%s,%s",id,buffer3);
             }
